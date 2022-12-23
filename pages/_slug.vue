@@ -2,12 +2,14 @@
   <div class="container">
     <img :src="planet.image" alt="" />
     <h1 class="title">{{ planet.title }}</h1>
-    <NuxtLink to="/about">About</NuxtLink>
+    <p>{{ planet.description }}</p>
   </div>
 </template>
 
 <script>
-export default {
+import Vue from 'vue'
+
+export default Vue.extend({
   async asyncData({ params }) {
     const planet = await fetch(
       `https://api.nuxtjs.dev/planets/${params.slug}`
@@ -20,13 +22,36 @@ export default {
 
     return { planet }
   },
-}
+  head() {
+    return {
+      title: this.planet.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.planet.description,
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `https://jamstack-explorers-nuxt-mission/${this.$route.params.slug}`,
+        },
+      ],
+    }
+  },
+})
 </script>
 
-<style>
+<style scoped>
+* {
+  font-family: Nunito, Roboto, sans-serif;
+}
+
 .container {
   display: grid;
-  justify-items: start;
+  justify-items: center;
   justify-content: center;
 }
 

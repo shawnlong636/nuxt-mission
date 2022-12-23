@@ -8,9 +8,19 @@
 
 <script lang="ts">
 import Vue from 'vue'
-
 export default Vue.extend({
-  name: 'IndexPage',
+  head() {
+    return {
+      title: 'About',
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: 'https://jamstack-explorers-nuxt-mission/about',
+        },
+      ],
+    }
+  },
 })
 </script>
 
