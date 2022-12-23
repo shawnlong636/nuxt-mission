@@ -1,7 +1,9 @@
 <template>
   <div class="container">
-    <Tutorial />
-    <NuxtLink to="/about">About</NuxtLink>
+    <NuxtLogo />
+    <h1>About</h1>
+    <p>This is the about page. Information about the page goes here.</p>
+    <NuxtLink to="/">Home</NuxtLink>
   </div>
 </template>
 
@@ -13,7 +15,7 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style lang="scss">
 .container {
   display: grid;
   justify-items: center;
