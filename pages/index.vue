@@ -2,32 +2,27 @@
   <div class="container">
     <NuxtLogo />
     <h1 class="title">Nuxt Mission</h1>
-    <p v-if="$fetchState.pending">Fetching Planets...</p>
-    <p v-else-if="$fetchState.error">Error while fetching planets</p>
-    <ul>
-      <li><NuxtLink to="/Nuxt">Nuxt</NuxtLink></li>
-      <li v-for="planet in planets" :key="planet.slug">
-        <NuxtLink :to="planet.slug">{{ planet.title }}</NuxtLink>
-      </li>
-    </ul>
+    <button @click="showPlanets">{{ show ? 'Hide' : 'Show' }} Planets</button>
+    <div v-if="show">
+      <LazyPlanetsList />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Planet from '../models/planet'
 
 export default Vue.extend({
   layout: 'home',
   data() {
-    const planets: Array<Planet> = []
-    return { planets }
+    return {
+      show: false,
+    }
   },
-
-  async fetch() {
-    this.planets = (await fetch('https://api.nuxtjs.dev/planets').then((res) =>
-      res.json()
-    )) as Planet[]
+  methods: {
+    showPlanets() {
+      this.show = !this.show
+    },
   },
 })
 </script>

@@ -3,13 +3,17 @@
     <img :src="planet.image" alt="" />
     <h1 class="title">{{ planet.title }}</h1>
     <p>{{ planet.description }}</p>
+    <PlanetsList class="planets" />
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import PlanetsList from '~/components/PlanetsList.vue'
 
 export default Vue.extend({
+  components: { PlanetsList },
+  transition: 'bounce',
   async asyncData({ params }) {
     const planet = await fetch(
       `https://api.nuxtjs.dev/planets/${params.slug}`
@@ -19,7 +23,6 @@ export default Vue.extend({
       }
       throw new Error(res.status)
     })
-
     return { planet }
   },
   head() {
