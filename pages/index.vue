@@ -2,29 +2,14 @@
   <div class="container">
     <NuxtLogo />
     <h1 class="title">Nuxt Mission</h1>
-    <button @click="showPlanets">{{ show ? 'Hide' : 'Show' }} Planets</button>
-    <div v-if="show">
-      <LazyPlanetsList />
-    </div>
+    <PlanetsList />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-export default Vue.extend({
-  layout: 'home',
-  data() {
-    return {
-      show: false,
-    }
-  },
-  methods: {
-    showPlanets() {
-      this.show = !this.show
-    },
-  },
-})
+export default Vue.extend({})
 </script>
 
 <style scoped lang="scss">
